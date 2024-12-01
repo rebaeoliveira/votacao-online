@@ -1,0 +1,143 @@
+/* EleitorDashboard.css */
+
+/* Container de fundo */
+.eleitor-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2575fc 0%, #340666 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animação das formas no fundo */
+.eleitor-container::before,
+.eleitor-container::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 400px;
+  height: 400px;
+  top: 20%;
+  left: -50%;
+  animation: moveBackground 10s infinite linear;
+}
+
+.eleitor-container::after {
+  width: 500px;
+  height: 500px;
+  left: 50%;
+  top: 50%;
+  animation: moveBackground 15s infinite linear reverse;
+}
+
+/* Animação das formas de fundo */
+@keyframes moveBackground {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(100%) translateY(100%);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+/* Estilo do painel de login do eleitor */
+.eleitor-box {
+  background-color: rgba(255, 255, 255, 0.8); /* Caixa de conteúdo com leve transparência */
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  width: 700px; /* Aumenta a largura da caixa */
+  max-width: 90%; /* A caixa terá um tamanho máximo de 90% da largura da tela */
+  margin: 0 auto; /* Centraliza a caixa na tela */
+  position: relative;
+  z-index: 10;
+}
+
+/* Título */
+h2 {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  color: #093a8d; /* Cor do título */
+  text-align: center;
+}
+
+/* Nome do Sistema */
+.system-name {
+  font-size: 36px; /* Aumenta o tamanho da fonte */
+  text-align: center;
+  margin-top: 20px; /* Ajusta o espaçamento para mover o título mais para cima */
+  margin-bottom: 10px; /* Ajusta o espaçamento abaixo */
+}
+
+/* Nome da Eleição */
+.election-name {
+  font-size: 32px; /* Aumenta o tamanho da fonte */
+  text-align: center;
+  margin-top: 10px; /* Diminui o espaço acima */
+  margin-bottom: 30px; /* Adiciona um bom espaço abaixo */
+}
+
+/* Título "Selecione um Candidato" */
+h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 40px; /* Aumenta o espaçamento acima do título de selecionar candidato */
+  margin-bottom: 20px; /* Adiciona espaço abaixo */
+}
+
+/* Seletor de Candidato */
+.candidate-box {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.candidate-card {
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  text-align: center;
+  width: 150px;
+  margin: 10px;
+}
+
+.candidate-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px; /* Dando mais espaço entre a foto e o nome */
+}
+
+.candidate-card p {
+  font-weight: bold;
+  color: #093a8d;
+}
+
+/* Botão de voto */
+button.vote-btn {
+  background-color: #093a8d;
+  border-color: #093a8d;
+  font-size: 18px;
+  padding: 10px 20px;
+  width: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+button.vote-btn:hover {
+  background-color: #1a62d1;
+  border-color: #1a62d1;
+}
+
+button.vote-btn:focus {
+  box-shadow: 0 0 5px rgba(37, 117, 252, 0.6);
+}

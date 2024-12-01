@@ -1,0 +1,100 @@
+/* LoginScreen.css */
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #340666 0%, #2575fc 100%); /* Gradiente suave entre duas cores */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Formas geométricas no fundo */
+.login-container::before,
+.login-container::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 400px;
+  height: 400px;
+  top: 20%;
+  left: -50%;
+  animation: moveBackground 10s infinite linear;
+}
+
+.login-container::after {
+  width: 500px;
+  height: 500px;
+  left: 50%;
+  top: 50%;
+  animation: moveBackground 15s infinite linear reverse;
+}
+
+/* Animação das formas */
+@keyframes moveBackground {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(100%) translateY(100%);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+.login-box {
+  background-color: rgba(255, 255, 255, 0.8); /* Caixa de login com leve transparência */
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+h2 {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  color: #093a8d; /* Cor do título */
+}
+
+.form-group label {
+  font-weight: bold;
+  color: #093a8d;
+}
+
+.form-control {
+  border-radius: 5px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+}
+
+.form-control:focus {
+  border-color: #2575fc;
+  box-shadow: 0 0 5px rgba(37, 117, 252, 0.6);
+}
+
+.alert {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+button.btn {
+  background-color: #093a8d;
+  border-color: #093a8d;
+  font-size: 18px;
+  padding: 12px;
+}
+
+button.btn:hover {
+  background-color: #1a62d1;
+  border-color: #1a62d1;
+}
+
+button.btn:focus {
+  box-shadow: 0 0 5px rgba(37, 117, 252, 0.6);
+}
