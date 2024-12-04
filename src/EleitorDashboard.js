@@ -9,7 +9,7 @@ const EleitorDashboard = () => {
   const [mensagem, setMensagem] = useState('');
 
   useEffect(() => {
-    // Buscar candidatos
+    // Buscar candidatos //
     axios
       .get('http://localhost:3001/candidatos')
       .then((response) => {
