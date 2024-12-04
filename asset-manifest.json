@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/votacao-online/static/css/main.a4ce79e3.css",
+    "main.js": "/votacao-online/static/js/main.376c9d6e.js",
+    "static/js/239.1333b854.chunk.js": "/votacao-online/static/js/239.1333b854.chunk.js",
+    "static/js/213.47d92e85.chunk.js": "/votacao-online/static/js/213.47d92e85.chunk.js",
+    "static/js/455.c0b71c88.chunk.js": "/votacao-online/static/js/455.c0b71c88.chunk.js",
+    "static/js/453.9ecfe7c3.chunk.js": "/votacao-online/static/js/453.9ecfe7c3.chunk.js",
+    "index.html": "/votacao-online/index.html",
+    "main.a4ce79e3.css.map": "/votacao-online/static/css/main.a4ce79e3.css.map",
+    "main.376c9d6e.js.map": "/votacao-online/static/js/main.376c9d6e.js.map",
+    "239.1333b854.chunk.js.map": "/votacao-online/static/js/239.1333b854.chunk.js.map",
+    "213.47d92e85.chunk.js.map": "/votacao-online/static/js/213.47d92e85.chunk.js.map",
+    "455.c0b71c88.chunk.js.map": "/votacao-online/static/js/455.c0b71c88.chunk.js.map",
+    "453.9ecfe7c3.chunk.js.map": "/votacao-online/static/js/453.9ecfe7c3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a4ce79e3.css",
+    "static/js/main.376c9d6e.js"
+  ]
+}
