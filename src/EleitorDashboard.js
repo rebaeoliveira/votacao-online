@@ -12,7 +12,10 @@ const EleitorDashboard = () => {
     // Buscar candidatos
     axios
       .get('http://localhost:3001/candidatos')
-      .then((response) => setCandidatos(response.data))
+      .then((response) => {
+        const candidatosOrdenados = response.data.sort((a, b) => a.nome.localeCompare(b.nome)); // Ordena os candidatos por nome
+        setCandidatos(candidatosOrdenados);
+      })
       .catch((error) => console.error('Erro ao buscar candidatos:', error));
   }, []);
 
@@ -66,16 +69,19 @@ const EleitorDashboard = () => {
 
         <div className="candidate-box">
           {candidatos.map((candidato) => (
-            <div key={candidato.id} className="candidate-card">
+            <div
+              key={candidato.id}
+              className={`candidate-card ${candidatoSelecionado?.id === candidato.id ? 'selected' : ''}`} // Classe adicionada para o candidato selecionado
+            >
               <img
-                src={candidato.foto_url || 'default-image.jpg'}
+                src={candidato.foto_url || 'default-image.jpg'} // Foto carregada ou uma imagem padrão
                 alt={candidato.nome}
                 className="candidate-image"
               />
               <p>{candidato.nome}</p>
               <button
                 className={`btn btn-primary ${candidatoSelecionado?.id === candidato.id ? 'btn-selected' : ''}`}
-                onClick={() => setCandidatoSelecionado(candidato)}
+                onClick={() => setCandidatoSelecionado(candidato)} // Seleciona o candidato ao clicar
               >
                 Selecionar
               </button>

@@ -1,5 +1,3 @@
-/* EleitorDashboard.css */
-
 /* Container de fundo */
 .eleitor-container {
   min-height: 100vh;
@@ -11,50 +9,15 @@
   overflow: hidden;
 }
 
-/* Animação das formas no fundo */
-.eleitor-container::before,
-.eleitor-container::after {
-  content: '';
-  position: absolute;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  width: 400px;
-  height: 400px;
-  top: 20%;
-  left: -50%;
-  animation: moveBackground 10s infinite linear;
-}
-
-.eleitor-container::after {
-  width: 500px;
-  height: 500px;
-  left: 50%;
-  top: 50%;
-  animation: moveBackground 15s infinite linear reverse;
-}
-
-/* Animação das formas de fundo */
-@keyframes moveBackground {
-  0% {
-    transform: translateX(0) translateY(0);
-  }
-  50% {
-    transform: translateX(100%) translateY(100%);
-  }
-  100% {
-    transform: translateX(0) translateY(0);
-  }
-}
-
 /* Estilo do painel de login do eleitor */
 .eleitor-box {
-  background-color: rgba(255, 255, 255, 0.8); /* Caixa de conteúdo com leve transparência */
+  background-color: rgba(255, 255, 255, 0.9); /* Leve transparência */
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  width: 700px; /* Aumenta a largura da caixa */
-  max-width: 90%; /* A caixa terá um tamanho máximo de 90% da largura da tela */
-  margin: 0 auto; /* Centraliza a caixa na tela */
+  width: 700px;
+  max-width: 90%;
+  margin: 0 auto;
   position: relative;
   z-index: 10;
 }
@@ -63,32 +26,32 @@
 h2 {
   font-family: 'Arial', sans-serif;
   font-weight: bold;
-  color: #093a8d; /* Cor do título */
+  color: #093a8d;
   text-align: center;
 }
 
 /* Nome do Sistema */
 .system-name {
-  font-size: 36px; /* Aumenta o tamanho da fonte */
+  font-size: 36px;
   text-align: center;
-  margin-top: 20px; /* Ajusta o espaçamento para mover o título mais para cima */
-  margin-bottom: 10px; /* Ajusta o espaçamento abaixo */
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 /* Nome da Eleição */
 .election-name {
-  font-size: 32px; /* Aumenta o tamanho da fonte */
+  font-size: 32px;
   text-align: center;
-  margin-top: 10px; /* Diminui o espaço acima */
-  margin-bottom: 30px; /* Adiciona um bom espaço abaixo */
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
 
 /* Título "Selecione um Candidato" */
 h2 {
   font-size: 24px;
   text-align: center;
-  margin-top: 40px; /* Aumenta o espaçamento acima do título de selecionar candidato */
-  margin-bottom: 20px; /* Adiciona espaço abaixo */
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 /* Seletor de Candidato */
@@ -107,6 +70,11 @@ h2 {
   text-align: center;
   width: 150px;
   margin: 10px;
+  transition: transform 0.2s;
+}
+
+.candidate-card:hover {
+  transform: scale(1.05);
 }
 
 .candidate-card img {
@@ -114,7 +82,7 @@ h2 {
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 10px; /* Dando mais espaço entre a foto e o nome */
+  margin-bottom: 10px;
 }
 
 .candidate-card p {
@@ -122,22 +90,80 @@ h2 {
   color: #093a8d;
 }
 
+.candidate-card .selected {
+  border: 2px solid #093a8d;
+  padding: 5px;
+  background-color: #f0f8ff;
+}
+
 /* Botão de voto */
 button.vote-btn {
-  background-color: #093a8d;
+  background-color: #093a8d; /* Cor azul igual ao botão "Selecionar" */
   border-color: #093a8d;
-  font-size: 18px;
-  padding: 10px 20px;
+  font-size: 20px;
+  padding: 12px 25px;
   width: auto;
-  margin: 0 auto;
+  margin: 20px auto;
   display: block;
+  border-radius: 8px;
+  color: #000; /* Texto em preto */
+  font-weight: bold; /* Texto em negrito */
+  text-transform: uppercase; /* Deixa o texto em caixa alta */
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button.vote-btn:hover {
-  background-color: #1a62d1;
+  background-color: #1a62d1; /* Cor mais clara no hover */
   border-color: #1a62d1;
+  transform: scale(1.05);
 }
 
 button.vote-btn:focus {
   box-shadow: 0 0 5px rgba(37, 117, 252, 0.6);
+}
+
+button.vote-btn:disabled {
+  background-color: #cccccc;
+  border-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Adiciona a borda ou destaque no candidato selecionado */
+.candidate-card.selected {
+  border: 3px solid #2575fc; /* Cor azul para o destaque */
+  background-color: #e6f4ff; /* Cor de fundo mais suave para destacar o candidato selecionado */
+  box-shadow: 0 0 10px rgba(37, 117, 252, 0.6); /* Sombra para o destaque */
+}
+
+/* Botão de Selecionar do Candidato */
+button.btn-selected {
+  background-color: #2575fc; /* Cor azul para o botão selecionado */
+  border-color: #2575fc;
+  color: white; /* Texto branco para destacar */
+}
+
+button.btn-selected:hover {
+  background-color: #1a62d1; /* Um tom de azul mais escuro quando o botão é selecionado */
+  border-color: #1a62d1;
+}
+
+
+/* Botão de Selecionar do Candidato */
+button.btn-selected {
+  background-color: #2575fc; /* Cor azul para o botão selecionado */
+  border-color: #2575fc;
+  color: white; /* Texto branco para destacar */
+}
+
+button.btn-selected:hover {
+  background-color: #1a62d1; /* Um tom de azul mais escuro quando o botão é selecionado */
+  border-color: #1a62d1;
+}
+
+.candidate-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px; /* Espaçamento entre a foto e o nome */
 }
