@@ -216,9 +216,12 @@ function AdminDashboard() {
 
   const exportarPDF = () => {
     const doc = new jsPDF();
+  
+    // Definir a fonte como Arial, normal, e tamanho 18 para o título
+    doc.setFont('Arial', 'normal');
     doc.setFontSize(18);
     doc.text('Relatório de Resultado da Eleição', 14, 20);
-
+  
     const tabelaDados = resultados.map((r) => [
       r.candidato,
       r.votos_servidores,
@@ -227,21 +230,54 @@ function AdminDashboard() {
       r.votos_ponderados,
       r.eleito || '',
     ]);
-
+  
+    // Inserir a tabela no PDF
     doc.autoTable({
       head: [['Candidato', 'Votos Servidores', 'Votos Pais', 'Total Bruto', 'Total Ponderado', 'Status']],
       body: tabelaDados,
       startY: 30,
     });
-
+  
+    // Adicionar o gráfico ao PDF
     const canvas = document.querySelector('canvas');
     if (canvas) {
       const imgData = canvas.toDataURL('image/png');
       doc.addImage(imgData, 'PNG', 10, doc.autoTable.previous.finalY + 10, 180, 80);
     }
-
+  
+    // Resumo da Eleição
+    doc.setFontSize(14); // Fonte normal para o resumo
+    const yOffset = doc.autoTable.previous.finalY + 110; // Ajustar Y para pular uma linha
+  
+    // Resumo com a porcentagem
+    if (resultados.length > 0) {
+      const vencedor = resultados[0].candidato;
+      const votosPonderados = resultados[0].votos_ponderados.replace('.', ',') + '%';
+  
+      // Texto do resumo
+      const resumo = [
+        `O(A) ${vencedor} foi eleito(a) com ${votosPonderados} dos votos ponderados.`,
+        'Esta eleição contou com a participação de eleitores dos segmentos servidores e pais, com os votos sendo ponderados igualmente entre os segmentos, sendo 50% para a urna do segmento servidores e 50% para a urna do segmento pais.'
+      ];
+  
+      // Para evitar que o texto ultrapasse o limite da página, usamos splitTextToSize
+      const textoResumido = doc.splitTextToSize(resumo.join("\n"), 180);
+  
+      // Centralizar o título "Resultado da Eleição"
+      doc.setFont('Arial', 'bold'); // Fonte em negrito para o título
+      doc.text('RESULTADO DA ELEIÇÃO', doc.internal.pageSize.getWidth() / 2, yOffset - 10, { align: 'center' });
+  
+      // Adicionar as linhas do resumo no PDF
+      doc.setFont('Arial', 'normal'); // Voltar para fonte normal para o resumo
+      doc.text(textoResumido, 14, yOffset);
+    }
+  
+    // Salvar o PDF
     doc.save('resultado-eleicao.pdf');
   };
+  
+  
+  
 
   const chartData = {
     labels: resultados.map((r) => r.candidato),
@@ -317,6 +353,14 @@ function AdminDashboard() {
   const votosPaginaAtual = votos.slice(indexPrimeiroItem, indexUltimoItem);
 
   const mudarPagina = (novaPagina) => setPaginaAtual(novaPagina);
+
+  // Calculando o candidato vencedor para exibir o resumo
+const candidatoVencedor = resultados[0]; // O primeiro item será o vencedor com a maior porcentagem
+
+// Texto de resumo
+const resumoEleicao = candidatoVencedor ? 
+  `Resultado da Eleição: O candidato ${candidatoVencedor.candidato} foi eleito com ${candidatoVencedor.votos_ponderados}% dos votos ponderados.` : 
+  "Resultado da Eleição: Nenhum vencedor foi encontrado.";
 
   return (
     <div className="container">
@@ -538,7 +582,6 @@ function AdminDashboard() {
           </tbody>
         </table>
 
-
         <h2>Gráfico de Resultado da Eleição</h2>
         <Bar data={chartData} options={chartOptions} />
         <button className="btn btn-success mt-3" onClick={exportarPDF}>
@@ -548,5 +591,7 @@ function AdminDashboard() {
     </div>
   );
 }
+
+
 
 export default AdminDashboard;
