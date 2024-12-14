@@ -10,11 +10,12 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import ChartDataLabels from 'chartjs-plugin-datalabels'; // Importando o plugin
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
+ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend, ChartDataLabels);
 
 function AdminDashboard() {
   const [candidatos, setCandidatos] = useState([]);
@@ -31,6 +32,9 @@ function AdminDashboard() {
   const [mostrarListaEleitores, setMostrarListaEleitores] = useState(false);
   const [mostrarCadastroEleitor, setMostrarCadastroEleitor] = useState(false);
   const [mostrarVotosRegistrados, setMostrarVotosRegistrados] = useState(false);
+  const [totalVotosServidores, setTotalVotosServidores] = useState(0);
+  const [totalVotosPais, setTotalVotosPais] = useState(0);
+  const [totalVotosBrutos, setTotalVotosBrutos] = useState(0);
 
   // Paginação
   const [paginaAtual, setPaginaAtual] = useState(1);
@@ -70,15 +74,27 @@ function AdminDashboard() {
       .then((response) => {
         const resultadosAtualizados = response.data.map((resultado) => ({
           ...resultado,
+          votos_servidores: Number(resultado.votos_servidores) || 0, // Garantir que seja número
+          votos_pais: Number(resultado.votos_pais) || 0,           // Garantir que seja número
           total_bruto: Number(resultado.votos_servidores || 0) + Number(resultado.votos_pais || 0),
         }));
-
+  
+        // Calcular totais dos segmentos
+        const totalVotosServidores = resultadosAtualizados.reduce((acc, resultado) => acc + resultado.votos_servidores, 0);
+        const totalVotosPais = resultadosAtualizados.reduce((acc, resultado) => acc + resultado.votos_pais, 0);
+        const totalVotosBrutos = totalVotosServidores + totalVotosPais;
+  
+        // Adicionar totais ao estado
+        setTotalVotosServidores(totalVotosServidores);
+        setTotalVotosPais(totalVotosPais);
+        setTotalVotosBrutos(totalVotosBrutos);
+  
+        // Ordenar os resultados e marcar o vencedor
         resultadosAtualizados.sort((a, b) => b.votos_ponderados - a.votos_ponderados);
-
         if (resultadosAtualizados.length > 0) {
           resultadosAtualizados[0].eleito = 'Eleito';
         }
-
+  
         setResultados(resultadosAtualizados);
       })
       .catch((error) => console.error('Erro ao buscar resultados:', error));
@@ -233,47 +249,66 @@ function AdminDashboard() {
       {
         label: 'Votos Servidores',
         data: resultados.map((r) => r.votos_servidores),
-        backgroundColor: 'rgba(75, 192, 192, 0.6)', // Cor das barras para servidores
+        backgroundColor: 'rgba(0, 51, 32, 0.6)', // Cor das barras para servidores
       },
       {
         label: 'Votos Pais',
         data: resultados.map((r) => r.votos_pais),
-        backgroundColor: 'rgba(153, 102, 255, 0.6)', // Cor das barras para pais
+        backgroundColor: 'rgba(255, 159, 64, 0.6)', // Cor das barras para pais
       },
       {
-        label: 'Votos Ponderados',
-        data: resultados.map((r) => r.votos_ponderados),
-        backgroundColor: 'rgba(255, 159, 64, 0.6)', // Cor das barras para votos ponderados
+        label: 'Total Ponderado',
+      data: resultados.map((r) => parseFloat(r.votos_ponderados)),
+      backgroundColor: 'rgba(153, 51, 255, 0.9)',
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 1,
       },
     ],
   };
-  
 
+  // Configuração do gráfico com as labels sobre as barras incluindo o total ponderado
   const chartOptions = {
-  responsive: true,
-  plugins: {
-    datalabels: {
-      color: 'black',
-      font: {
-        weight: 'bold',
-        size: 14,
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
       },
-      formatter: (value) => value.toFixed(2), // Exibe os valores com 2 casas decimais
+      tooltip: {
+        enabled: true,
+      },
+      datalabels: {
+        display: true, // Exibir labels
+        color: 'black',
+        font: {
+          weight: 'bold',
+          size: 14,
+        },
+        formatter: (value, context) => {
+          // Mostrar o total ponderado como porcentagem dentro da barra
+          if (context.dataset.label === 'Total Ponderado') {
+            return `${value.toFixed(2)}%`; // Exibe como porcentagem
+          }
+          return `${value}`; // Para outras barras, exibe o valor normal
+        },
+      },
     },
-    legend: {
-      position: 'top',
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Candidatos',
+        },
+      },
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Votos',
+        },
+      },
     },
-  },
-  scales: {
-    x: {
-      title: { display: true, text: 'Candidatos' },
-    },
-    y: {
-      beginAtZero: true,
-      title: { display: true, text: 'Número de Votos' },
-    },
-  },
-};
+  };
+
 
 
   // Paginação - Calcular votos exibidos na página atual
@@ -472,27 +507,37 @@ function AdminDashboard() {
         <table className="table table-striped">
           <thead>
             <tr>
-              <th className="text-center">Candidato</th>
-              <th className="text-center">Votos Servidores</th>
-              <th className="text-center">Votos Pais</th>
-              <th className="text-center">Total Bruto</th>
-              <th className="text-center">Total Ponderado</th>
-              <th className="text-center">Status</th>
+              <th>Candidato</th>
+              <th>Votos Servidores</th>
+              <th>Votos Pais</th>
+              <th>Total Bruto</th>
+              <th>Total Ponderado</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
             {resultados.map((resultado) => (
               <tr key={resultado.candidato}>
-                <td className="text-center">{resultado.candidato}</td>
-                <td className="text-center">{resultado.votos_servidores}</td>
-                <td className="text-center">{resultado.votos_pais}</td>
-                <td className="text-center">{resultado.total_bruto}</td>
-                <td className="text-center">{resultado.votos_ponderados.replace('.', ',')}%</td>
-                <td className="text-center">{resultado.eleito || ''}</td>
+                <td>{resultado.candidato}</td>
+                <td>{resultado.votos_servidores}</td>
+                <td>{resultado.votos_pais}</td>
+                <td>{resultado.total_bruto}</td>
+                <td>{resultado.votos_ponderados.replace('.', ',')}%</td>
+                <td>{resultado.eleito || ''}</td>
               </tr>
             ))}
+            {/* Linha com os totais dos segmentos e total bruto */}
+            <tr>
+              <td><strong>Total</strong></td>
+              <td><strong>{totalVotosServidores}</strong></td>
+              <td><strong>{totalVotosPais}</strong></td>
+              <td><strong>{totalVotosBrutos}</strong></td>
+              <td></td>
+              <td></td>
+            </tr>
           </tbody>
         </table>
+
 
         <h2>Gráfico de Resultado da Eleição</h2>
         <Bar data={chartData} options={chartOptions} />

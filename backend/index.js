@@ -3,9 +3,29 @@ const cors = require('cors');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt'); // Para encriptar a senha
+const crypto = require('crypto'); // Importando a biblioteca para criptografia assimétrica
+const https = require('https'); // Para servidor HTTPS
+const fs = require('fs'); // Para ler os arquivos de certificado
 
 const app = express();
 const port = 3001;
+
+// Gerar as chaves pública e privada
+const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
+  modulusLength: 2048, // Tamanho da chave em bits
+});
+
+// Função para criptografar a senha com a chave pública
+const encryptPassword = (password, publicKey) => {
+  const encrypted = crypto.publicEncrypt(publicKey, Buffer.from(password));
+  return encrypted.toString('base64');
+};
+
+// Função para descriptografar a senha com a chave privada
+const decryptPassword = (encryptedPassword, privateKey) => {
+  const decrypted = crypto.privateDecrypt(privateKey, Buffer.from(encryptedPassword, 'base64'));
+  return decrypted.toString();
+};
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -50,17 +70,18 @@ app.post('/login', (req, res) => {
       return res.status(400).json({ message: 'Eleitor já votou nesta eleição!' });
     }
 
-    // Verifica a senha
-    bcrypt.compare(password, eleitor.senha_hash, (err, result) => {
-      if (err || !result) {
-        return res.status(401).json({ message: 'Credenciais inválidas' });
-      }
+    // Descriptografa a senha com a chave privada
+    const decryptedPassword = decryptPassword(eleitor.senha_hash, privateKey);
 
-      return res.status(200).json({
-        message: 'Login bem-sucedido',
-        role: 'eleitor',
-        segmento: eleitor.segmento, // Retorna o segmento do eleitor após login
-      });
+    // Verifica se a senha descriptografada é válida
+    if (password !== decryptedPassword) {
+      return res.status(401).json({ message: 'Credenciais inválidas' });
+    }
+
+    return res.status(200).json({
+      message: 'Login bem-sucedido',
+      role: 'eleitor',
+      segmento: eleitor.segmento, // Retorna o segmento do eleitor após login
     });
   });
 });
@@ -350,6 +371,17 @@ app.delete('/eleitores/:id', (req, res) => {
     }
   });
 });
+
+// Carregue os certificados para a criptografia TLS
+// const options = {
+//   key: fs.readFileSync('key.pem'), // Caminho para a chave privada
+//   cert: fs.readFileSync('cert.pem'), // Caminho para o certificado
+// };
+
+// Inicia o servidor HTTPS
+// https.createServer(options, app).listen(port, () => {
+//   console.log(`Servidor seguro rodando em https://localhost:${port}`);
+// });
 
 
 // Iniciar o servidor
