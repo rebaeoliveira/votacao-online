@@ -49,7 +49,7 @@ O objetivo do projeto **Democracia Digital na Escola** é modernizar o processo 
 
 ---
 
-## 🖼️ Diagramas do Sistema
+## 🖼️ Diagramas
 
 ### Diagrama de Casos de Uso
 [Casos de Uso](https://github.com/rebaeoliveira/votacao-online/blob/master/docs/Casos%20de%20uso.png)
@@ -63,7 +63,7 @@ O objetivo do projeto **Democracia Digital na Escola** é modernizar o processo 
 
 ---
 
-## 🔐 Segurança do Sistema
+## 🔐 Segurança
 
 1. **Criptografia de Dados**: Criptografia assimétrica para votos.
 2. **Hashing de Senhas**: Armazenamento seguro com bcrypt.
