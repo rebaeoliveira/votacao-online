@@ -98,6 +98,60 @@ Foram realizados testes com diferentes segmentos da comunidade escolar. Resultad
 
 ---
 
+## 🚀 Executar o Sistema
+
+### Pré-requisitos
+Antes de começar, certifique-se de instalar as seguintes funcionalidades:
+- [Node.js](https://nodejs.org)
+- [MySQL](https://dev.mysql.com/downloads/)
+
+### 1️⃣ Clonar o Repositório
+- **Clonar este repositório para sua máquina local:**
+  - git clone https://github.com/rebaeoliveira/votacao-online
+- **Navegar até a pasta do projeto:**
+  - cd votacao-online
+ 
+### 2️⃣ Configurar o Banco de Dados
+- **Criar o banco de dados:**
+  - CREATE DATABASE votacao_online;
+- **Importar o arquivo SQL de configuração do banco de dados:**
+  - mysql -u root -p votacao_online < setup.sql
+ 
+### 3️⃣ Configurar o Backend
+- **Navegar até a pasta backend:**
+  -  cd backend
+- **Instalar as dependências do backend:**
+  - npm install
+- **Iniciar o servidor backend:**
+  - npm start
+
+O servidor será iniciado em http://localhost:3001.  
+
+### 4️⃣ Configurar o Frontend
+- **Navegar até a pasta frontend:**
+  -  cd votacao-online
+- **Instalar as dependências do frontend:**
+  - npm install
+- **Iniciar o servidor frontend:**
+  - npm start
+
+O sistema estará disponível em http://localhost:3000.
+
+### 5️⃣ Credenciais e Funcionalidades
+- **Administrador:** 
+  - Usuário: admin
+  - Senha: admin123
+    - Gerenciar eleições, urnas, candidatos e eleitores.
+    - Visualizar resultados em tempo real.
+    - Exportar relatórios em PDF.
+- **Eleitor:**  
+  - Usuário: eleitor
+  - Senha: eleitor123
+    - Selecionar candidato.
+    - votar.            
+
+---
+
 ## 📜 Licença
 
 Este projeto está licenciado sob a [Licença MIT](LICENSE).
