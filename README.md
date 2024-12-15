@@ -1,5 +1,14 @@
-# Democracia Digital na Escola
-### Sistema eleitoral online para eleição do diretor escolar
+<div align="center">
+  <h1 style="font-size: 4em; font-weight: bold; line-height: 1.2;">
+    Democracia Digital na Escola
+  </h1>
+</div>
+
+<div align="center">
+  <h3 style="font-size: 1.5em; font-weight: normal; color: #555;">
+    Sistema eleitoral online para eleição do diretor escolar
+  </h3>
+</div>
 
 ---
 
