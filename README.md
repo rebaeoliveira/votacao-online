@@ -43,10 +43,10 @@ O objetivo do projeto **Democracia Digital na Escola** é modernizar o processo 
 ## 🖼️ Diagramas do Sistema
 
 ### Diagrama de Casos de Uso
-![Casos de Uso](https://github.com/rebaeoliveira/votacao-online/blob/master/docs/Casos%20de%20uso.png)
+[Casos de Uso](https://github.com/rebaeoliveira/votacao-online/blob/master/docs/Casos%20de%20uso.png)
 
 ### Diagrama de Classes
-![Classes do Sistema](https://github.com/rebaeoliveira/votacao-online/blob/master/docs/Classe.png)
+[Classes do Sistema](https://github.com/rebaeoliveira/votacao-online/blob/master/docs/Classe.png)
 
 ### Fluxos de Atividades
 - **Administrador**: [Fluxo do Administrador](https://github.com/rebaeoliveira/votacao-online/blob/master/docs/Atividades%20administrador.png)
@@ -81,11 +81,11 @@ Foram realizados testes com diferentes segmentos da comunidade escolar. Resultad
 
 ## 📁 Estrutura do Projeto
 
-📦 Democracia Digital na Escola
-  ├── 📂 backend/  
-  ├── 📂 src (frontend)/  
-  ├── 📂 database/  
-  └── 📂 docs/
+📦 Democracia Digital na Escola  
+    ├── 📂 backend/  
+    ├── 📂 src (frontend)/  
+    ├── 📂 database/  
+    └── 📂 docs/
 
 ---
 
