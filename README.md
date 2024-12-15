@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# Democracia Digital na Escola
+### Sistema eleitoral online para eleição do diretor escolar
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## 📚 Visão Geral
+O objetivo do projeto **Democracia Digital na Escola** é modernizar o processo eleitoral para a escolha de diretores escolares em instituições públicas de ensino. O sistema foi projetado para promover maior eficiência, inclusão, acessibilidade e segurança no processo eleitoral, seguindo as diretrizes legais estabelecidas.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🎯 Objetivos
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Disponibilizar acesso remoto da votação aos eleitores.
+2. Desenvolver interface amigável e intuitiva para usuários com diferentes níveis de familiaridade tecnológica.
+3. Garantir a confidencialidade e segurança dos dados.
+4. Incorporar a ponderação de votos de acordo com as legislações legais, garantindo representatividade justa.
+5. Automatizar a apuração e publicação dos resultados eleitorais.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🛠️ Tecnologias Utilizadas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Backend**: Node.js + Express.js (APIs RESTful para processamento de dados e regras de aplicação).
+- **Frontend**: React.js (Interface de usuário dinâmica e interativa).
+- **Banco de Dados**: MySQL (Armazenamento e manipulação de dados estruturados).
+- **Segurança**:
+  - TLS (Transport Layer Security) para comunicação criptografada.
+  - Criptografia assimétrica para proteção de dados.
+  - Framework bcrypt para gerenciamento de senhas seguras.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ⚙️ Funcionalidades
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Gerenciamento de eleições, urnas, candidatos e eleitores.
+2. Registro e autenticação segura de eleitores.
+3. Garantia de que cada eleitor pode votar somente uma vez.
+4. Suporte à ponderação de votos entre diferentes segmentos eleitorais.
+5. Apuração automática dos votos e geração de relatórios em PDF.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🖼️ Diagramas do Sistema
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Diagrama de Casos de Uso
+![Casos de Uso](https://github.com/rebaeoliveira/votacao-online/blob/master/docs/Casos%20de%20uso.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Diagrama de Classes
+![Classes do Sistema](https://github.com/rebaeoliveira/votacao-online/blob/master/docs/Classe.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Fluxos de Atividades
+- **Administrador**: [Fluxo do Administrador](https://github.com/rebaeoliveira/votacao-online/blob/master/docs/Atividades%20administrador.png)
+- **Eleitor**: [Fluxo do Eleitor](https://github.com/rebaeoliveira/votacao-online/blob/master/docs/Atividades%20eleitor.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🔐 Segurança do Sistema
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. **Criptografia de Dados**: Criptografia assimétrica para votos.
+2. **Hashing de Senhas**: Armazenamento seguro com bcrypt.
+3. **TLS**: Segurança no tráfego de rede.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 🧪 Testes e Resultados
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Foram realizados testes com diferentes segmentos da comunidade escolar. Resultados:
+- **Usabilidade**: 95% dos usuários consideraram o sistema intuitivo e fácil de usar.
+- **Acessibilidade**: Sistema avaliado como "muito acessível" pela maioria dos participantes.
+- **Eficiência**: O sistema atendeu às expectativas dos usuários em termos de funcionalidade e confiabilidade.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📊 Expansão e Trabalhos Futuros
 
-### Making a Progressive Web App
+- Adaptação para diferentes legislações eleitorais.
+- Implementação de um módulo de auditoria robusto para maior transparência.
+- Conformidade com as Diretrizes de Acessibilidade WCAG 2.0.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 📁 Estrutura do Projeto
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+📦 Democracia Digital na Escola
+  ├── 📂 backend/  
+  ├── 📂 src (frontend)/  
+  ├── 📂 database/  
+  └── 📂 docs/
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📜 Licença
 
-### `npm run build` fails to minify
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## 📝 Referências
+
+1. Constituição da República Federativa do Brasil de 1988.
+2. Lei de Diretrizes e Bases da Educação Nacional (LDB).
+3. Lei Municipal nº 7.410/2022 - Cascavel, Paraná.
+
+---
+
+## 📩 Contato
+
+- **Renivaldo Baessa de Oliveira**: [rebaeoliveira@gmail.com](mailto:rebaeoliveira@gmail.com)
+
+---
+
+Para mais informações, visite o [repositório do projeto](https://github.com/rebaeoliveira/votacao-online).
