@@ -57,7 +57,7 @@ O objetivo do projeto **Democracia Digital na Escola** é modernizar o processo 
 ### Diagrama de Classes
 [Classes do Sistema](https://github.com/rebaeoliveira/votacao-online/blob/master/docs/Classe.png)
 
-### Fluxos de Atividades
+### Diagrama de Atividades
 - **Administrador**: [Fluxo do Administrador](https://github.com/rebaeoliveira/votacao-online/blob/master/docs/Atividades%20administrador.png)
 - **Eleitor**: [Fluxo do Eleitor](https://github.com/rebaeoliveira/votacao-online/blob/master/docs/Atividades%20eleitor.png)
 
