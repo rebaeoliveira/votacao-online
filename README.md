@@ -122,6 +122,19 @@ Antes de começar, certifique-se de instalar as seguintes funcionalidades:
   -  cd backend
 - **Instalar as dependências do backend:**
   - npm install
+- **Instalar as ferramentas utilizadas no backend:**
+  - npm install express
+    - Framework para criar API's e gerenciar rotas no Node.js.
+  - npm install mysql2
+    - Biblioteca para integração com o banco de dados MySQL.
+  - npm install bcrypt
+    - Biblioteca para hashing seguro de senhas.
+  - npm install body-parser
+    - Middleware para parsear o corpo das requisições HTTP.
+  - npm install cors
+    - Permite o compartilhamento de recursos entre diferentes origens (Cross-Origin Resource Sharing).
+  - crypto (nativo)
+    - Biblioteca do Node.js para criptografia e geração de chaves.
 - **Iniciar o servidor backend:**
   - npm start
 
@@ -132,6 +145,25 @@ O servidor será iniciado em http://localhost:3001.
   -  cd votacao-online
 - **Instalar as dependências do frontend:**
   - npm install
+- **Instalar as ferramentas utilizadas no frontend:**
+  - npm install react
+    - Biblioteca para criar interfaces de usuário.
+  - npm install react-dom
+    - Renderiza os componentes React na DOM.
+  - npm install react-router-dom
+    - Gerenciamento de rotas para navegação no React.
+  - npm install axios
+    - Biblioteca para realizar requisições HTTP.
+  - npm install chart.js
+    - Biblioteca para criar gráficos interativos.
+  - npm install react-chartjs-2
+    - Integração do Chart.js com o React.
+  - npm install bootstrap
+    - Framework CSS para estilização e design responsivo.
+  - npm install jspdf
+    - Biblioteca para geração de documentos PDF no frontend.
+  - npm install jspdf-autotable
+    - Extensão do jsPDF para criação de tabelas no PDF.
 - **Iniciar o servidor frontend:**
   - npm start
 
